@@ -1,0 +1,17 @@
+{
+  "$schema": "https://melty.gg/schemas/recipe.v1.json",
+  "title": "Gunfire Reborn: Elemental Horde",
+  "tagline": "Master elemental fusions, Occult Scrolls, and legendary bosses in Brotato!",
+  "description": "Brotato meets Gunfire Reborn! Combine Fire, Shock, and Corrosion elements to trigger devastating fusions (Miasma, Explosion, Manipulation). Upgrade your character in the shop with Occult Scrolls and Hero Active Abilities, and face off against Lu Wu at Wave 10 and Yoruhime-Maru at Wave 20.",
+  "games": ["brotato"],
+  "license": "MIT",
+  "remixAllowed": true,
+  "credits": "Created by Agent. Original concepts by Blobfish (Brotato) and Duoyi Games (Gunfire Reborn).",
+  "components": [
+    {
+      "fileName": "GunfireBrotato-v1.0.0.zip",
+      "destination": "{game}/mods/GunfireBrotato",
+      "requiredLoader": "godot-mod-loader"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+extends Node
+
+var active_statuses: Dictionary = {}
+
+func apply_element(enemy_id: String, element: String, damage: float, target_node: Node) -> void:
+    if not active_statuses.has(enemy_id):
+        active_statuses[enemy_id] = []
+    
+    var current_elements: Array = active_statuses[enemy_id]
+    if not current_elements.has(element):
+        current_elements.append(element)
+    
+    _check_fusions(enemy_id, current_elements, damage, target_node)
+
+func _check_fusions(enemy_id: String, elements: Array, damage: float, target_node: Node) -> void:
+    if elements.has("Corrosion") and elements.has("Shock"):
+        _trigger_miasma(enemy_id, target_node)
+    elif elements.has("Fire") and elements.has("Corrosion"):
+        _trigger_explosion(target_node, damage * 2.5)
+    elif elements.has("Fire") and elements.has("Shock"):
+        _trigger_manipulation(target_node)
+
+func _trigger_miasma(enemy_id: String, target_node: Node) -> void:
+    if target_node and target_node.has_method("take_dot_damage"):
+        target_node.take_dot_damage(target_node.max_health * 0.12, 3.0)
+
+func _trigger_explosion(target_node: Node, damage: float) -> void:
+    if target_node and target_node.has_method("area_explode"):
+        target_node.area_explode(damage, 150.0)
+
+func _trigger_manipulation(target_node: Node) -> void:
+    if target_node and target_node.has_method("apply_confuse"):
+        target_node.apply_confuse(4.0)

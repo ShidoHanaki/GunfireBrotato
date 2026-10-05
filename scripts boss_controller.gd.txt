@@ -1,0 +1,24 @@
+extends Node
+
+func _ready() -> void:
+    var MainNode = get_node_or_null("/root/Main")
+    if MainNode:
+        MainNode.connect("wave_started", self, "_on_wave_started")
+
+func _on_wave_started(wave_number: int) -> void:
+    if wave_number == 10:
+        _spawn_boss("Lu Wu", 1500, false)
+    elif wave_number == 20:
+        _spawn_boss("Yoruhime-Maru", 4500, true)
+
+func _spawn_boss(boss_name: String, hp: int, is_final: bool) -> void:
+    var EnemySpawner = get_node_or_null("/root/EnemySpawner")
+    if EnemySpawner:
+        var boss_instance = EnemySpawner.spawn_custom_boss(boss_name, hp)
+        if is_final and boss_instance:
+            boss_instance.connect("tree_exited", self, "_on_final_boss_defeated")
+
+func _on_final_boss_defeated() -> void:
+    var RunManager = get_node_or_null("/root/RunManager")
+    if RunManager and RunManager.has_method("trigger_victory"):
+        RunManager.trigger_victory("Defeated Yoruhime-Maru!")

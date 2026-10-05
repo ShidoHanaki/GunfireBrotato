@@ -1,0 +1,43 @@
+extends Node
+
+const MOD_DIR = "GunfireBrotato/"
+
+var elemental_system: Node = null
+var boss_controller: Node = null
+
+func _init() -> void:
+    ModLoaderLog.info("Initializing Gunfire Brotato Mashup Mod", MOD_DIR)
+
+func _ready() -> void:
+    _setup_systems()
+    _inject_shop_items()
+    ModLoaderLog.info("Gunfire Brotato successfully loaded!", MOD_DIR)
+
+func _setup_systems() -> void:
+    var ElementalScript = load("res://mods-unpacked/GunfireBrotato/scripts/elemental_system.gd")
+    elemental_system = ElementalScript.new()
+    add_child(elemental_system)
+
+    var BossScript = load("res://mods-unpacked/GunfireBrotato/scripts/boss_controller.gd")
+    boss_controller = BossScript.new()
+    add_child(boss_controller)
+
+func _inject_shop_items() -> void:
+    var ItemService = get_node_or_null("/root/ItemService")
+    if ItemService == null:
+        return
+    
+    # Load JSON design sheets
+    var scrolls_file = File.new()
+    if scrolls_file.open("res://mods-unpacked/GunfireBrotato/sheets/occult_scrolls.json", File.READ) == OK:
+        var scrolls_data = JSON.parse(scrolls_file.get_as_text()).result
+        scrolls_file.close()
+        for scroll in scrolls_data:
+            ItemService.add_custom_shop_item(scroll["id"], scroll)
+
+    var abilities_file = File.new()
+    if abilities_file.open("res://mods-unpacked/GunfireBrotato/sheets/hero_abilities.json", File.READ) == OK:
+        var abilities_data = JSON.parse(abilities_file.get_as_text()).result
+        abilities_file.close()
+        for ability in abilities_data:
+            ItemService.add_custom_shop_item(ability["id"], ability)
