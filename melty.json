@@ -1,7 +1,19 @@
 {
-  "schemaVersion": 1,
-  "id": "ShidoHanaki-GunfireBrotato",
-  "name": "Gunfire Brotato",
-  "version": "1.0.0",
-  "game": "brotato"
+  "$schema": "https://melty.gg/schemas/recipe.v1.json",
+  "title": "Gunfire Reborn: Elemental Horde",
+  "tagline": "Master elemental fusions, Occult Scrolls, and legendary bosses in Brotato!",
+  "description": "Brotato meets Gunfire Reborn! Combine Fire, Shock, and Corrosion elements to trigger devastating fusions.",
+  "games": [
+    "brotato"
+  ],
+  "license": "MIT",
+  "remixAllowed": true,
+  "credits": "Created by Agent. Original concepts by Blobfish (Brotato) and Duoyi Games (Gunfire Reborn).",
+  "components": [
+    {
+      "fileName": "GunfireBrotato-v1.0.0.zip",
+      "destination": "{game}/mods-unpacked/ShidoHanaki-GunfireBrotato",
+      "requiredLoader": "godot-mod-loader"
+    }
+  ]
 }
