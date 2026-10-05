@@ -11,7 +11,7 @@
   "credits": "Created by Agent. Original concepts by Blobfish (Brotato) and Duoyi Games (Gunfire Reborn).",
   "components": [
     {
-      "fileName": "GunfireBrotato-v1.0.0.zip",
+      "fileName": "GunfireBrotato-v1.0.1.zip",
       "destination": "{game}/mods-unpacked/ShidoHanaki-GunfireBrotato",
       "requiredLoader": "godot-mod-loader"
     }
